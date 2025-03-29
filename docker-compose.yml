@@ -1,0 +1,18 @@
+services:
+  deckofcards:
+    container_name: deckofcards
+    image: rotour/deckofcards:v2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    ports:
+      - "8080:8080"
+  nginx:
+    image: rotour/deckofcards:v2-nginx
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    container_name: nginx_static
+    platform: linux/amd64
+

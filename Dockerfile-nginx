@@ -1,0 +1,18 @@
+FROM nginx:alpine
+
+# Remove default nginx config
+RUN rm -rf /etc/nginx/conf.d/* /etc/nginx/nginx.conf
+
+# Copy your nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Create directory for static files
+COPY ./static /usr/share/nginx/html/
+
+# Set permissions
+RUN chown -R nginx:nginx /usr/share/nginx/html
+
+EXPOSE 80
+
+# Verify config before starting
+CMD ["nginx", "-g", "daemon off;"]
